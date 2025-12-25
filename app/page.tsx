@@ -1,23 +1,27 @@
+import { requireAuth } from "@/lib/auth-utils";
 import { cn } from "@/lib/utils";
-import Client from "./client";
-import { getQueryClient, trpc } from "@/trpc/server";
-import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
-import { Suspense } from "react";
+import { caller } from "@/trpc/server";
 
 export default async function Home() {
-  const queryClient = getQueryClient();
-  void queryClient.prefetchQuery(trpc.getUsers.queryOptions());
+  /**
+   * 这里的用处和 middlare 类似，都是为了更好的用户体验
+   * 防止用户看到报错页面
+   *
+   * 不用于确保安全，middlare 也不能用于确保安全
+   *
+   * 有很多办法可以突破 middlare 的安全保障
+   */
+  await requireAuth();
+
+  const data = await caller.getUsers();
+
   return (
     <div
       className={cn(
         "min-h-screen min-w-screen flex items-center justify-center"
       )}
     >
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <Suspense fallback={<div>loading...</div>}>
-          <Client />
-        </Suspense>
-      </HydrationBoundary>
+      {JSON.stringify(data)}
     </div>
   );
 }
