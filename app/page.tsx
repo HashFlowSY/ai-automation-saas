@@ -13,7 +13,7 @@ export default async function Home() {
    */
   await requireAuth();
 
-  const data = await caller.getUsers();
+  const data = await caller.getWorkflows();
 
   return (
     <div
