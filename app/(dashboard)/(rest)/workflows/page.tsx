@@ -9,6 +9,7 @@ import { ErrorBoundary } from "react-error-boundary";
 
 export default async function Page() {
   await requireAuth();
+  //TODO 解释一下为什么不需要使用 await
   prefetchWorkflows();
   return (
     <WorkflowsContainer>
