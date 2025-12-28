@@ -2,7 +2,7 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import prisma from "@/lib/prisma";
 import { polarClient } from "./polar-cilent";
-import { polar, checkout, portal, usage } from "@polar-sh/better-auth";
+import { polar, checkout, portal } from "@polar-sh/better-auth";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {

@@ -1,4 +1,3 @@
-import prisma from "@/lib/prisma";
 import { inngest } from "./client";
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { generateText } from "ai";
