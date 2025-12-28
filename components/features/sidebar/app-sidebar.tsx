@@ -42,7 +42,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { authClient } from "@/lib/auth-client";
-import { useHasActiveSubscription } from "../subscriptions/hooks/use-subsriptions";
+import { useHasActiveSubscription } from "../../../hooks/use-subsriptions";
 
 const menuItems = [
   {
