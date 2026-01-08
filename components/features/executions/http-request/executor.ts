@@ -3,9 +3,9 @@ import type { NodeExecutor } from "../../executions/types";
 import ky, { type Options as KyOptions } from "ky";
 
 type HttpRequstData = {
-  variableName?: string;
-  endpoint?: string;
-  method?: "GET" | "PUT" | "POST" | "DELETE" | "PATCH";
+  variableName: string;
+  endpoint: string;
+  method: "GET" | "PUT" | "POST" | "DELETE" | "PATCH";
   body?: string;
 };
 
@@ -24,10 +24,13 @@ export const httpRequestExecutor: NodeExecutor<HttpRequstData> = async ({
       "HTTP Request node: No variable name configured"
     );
   }
+  if (!data.method) {
+    throw new NonRetriableError("HTTP Request node: No method configured");
+  }
 
   const result = await step.run("http-request", async () => {
-    const endpoint = data.endpoint!;
-    const method = data.method || "GET";
+    const endpoint = data.endpoint;
+    const method = data.method;
 
     const options: KyOptions = { method };
     if (["POST", "PUT", "PATCH"].includes(method)) {
@@ -50,7 +53,7 @@ export const httpRequestExecutor: NodeExecutor<HttpRequstData> = async ({
 
     return {
       ...context,
-      [data.variableName || "httpResponse"]: responsePayload,
+      [data.variableName]: responsePayload,
     };
   });
 
