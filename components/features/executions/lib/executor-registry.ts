@@ -6,7 +6,9 @@ import { httpRequestExecutor } from "../http-request/executor";
 export const executorRegistry: Record<NodeType, NodeExecutor> = {
   [NodeType.MANUAL_TRIGGER]: manualTriggerExecutor,
   [NodeType.INITIAL]: manualTriggerExecutor,
-  [NodeType.HTTP_REQUEST]: httpRequestExecutor,
+  //TODO 应该有更好的解决方式
+  [NodeType.HTTP_REQUEST]: httpRequestExecutor as NodeExecutor,
+  [NodeType.GOOGLE_FORM_TRIGGER]: manualTriggerExecutor,
 };
 
 export const getExecutor = (type: NodeType): NodeExecutor => {
