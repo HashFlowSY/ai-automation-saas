@@ -7,7 +7,7 @@ export const executorRegistry: Record<NodeType, NodeExecutor> = {
   [NodeType.MANUAL_TRIGGER]: manualTriggerExecutor,
   [NodeType.INITIAL]: manualTriggerExecutor,
   //TODO 应该有更好的解决方式
-  [NodeType.HTTP_REQUEST]: httpRequestExecutor as NodeExecutor,
+  [NodeType.HTTP_REQUEST]: httpRequestExecutor,
   [NodeType.GOOGLE_FORM_TRIGGER]: manualTriggerExecutor,
 };
 
