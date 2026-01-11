@@ -2,6 +2,7 @@ import { NodeType } from "@/lib/generated/prisma/enums";
 import { NodeExecutor } from "../types";
 import { manualTriggerExecutor } from "../../triggers/manual-trigger/executor";
 import { httpRequestExecutor } from "../http-request/executor";
+import { stripeTriggerExecutor } from "../../triggers/stripe-trigger/executor";
 
 export const executorRegistry: Record<NodeType, NodeExecutor> = {
   [NodeType.MANUAL_TRIGGER]: manualTriggerExecutor,
@@ -9,6 +10,7 @@ export const executorRegistry: Record<NodeType, NodeExecutor> = {
   //TODO 应该有更好的解决方式
   [NodeType.HTTP_REQUEST]: httpRequestExecutor,
   [NodeType.GOOGLE_FORM_TRIGGER]: manualTriggerExecutor,
+  [NodeType.STRIPE_TRIGGER]: stripeTriggerExecutor,
 };
 
 export const getExecutor = (type: NodeType): NodeExecutor => {
