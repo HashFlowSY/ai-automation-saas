@@ -42,13 +42,13 @@ import {
 type EntityHeaderProps = {
   title: string;
   description?: string;
-  newButtonLabel: string;
+  newButtonLabel?: string;
   disabled?: boolean;
   isCreating?: boolean;
 } & (
   | { onNew: () => void; newButtonHref?: never }
   | { newButtonHref: string; onNew?: never }
-  | { onNew: never; newButtonHref?: never }
+  | { onNew?: never; newButtonHref?: never }
 );
 
 export const EntityHeader = ({
